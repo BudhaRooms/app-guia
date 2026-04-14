@@ -149,9 +149,9 @@ export default function GuiaPage() {
       <header className="fixed top-0 w-full z-50 bg-[#131313]/70 backdrop-blur-xl shadow-[0_20px_50px_rgba(229,226,225,0.05)]">
         <div className="flex justify-between items-center px-6 h-16 w-full max-w-7xl mx-auto">
           <div className="flex items-center gap-4">
-            <Link href="/" className="text-primary active:scale-95 duration-200">
+            <a href="https://budharooms.com" className="text-primary active:scale-95 duration-200">
               <span className="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
-            </Link>
+            </a>
           </div>
           <div className="font-headline uppercase tracking-[0.05em] text-sm md:text-xl font-black md:tracking-widest text-transparent bg-clip-text bg-linear-to-br from-primary to-primary-container">
             BUDHA ROOMS
