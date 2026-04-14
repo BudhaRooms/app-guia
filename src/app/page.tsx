@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { AudioPlayer } from '../components/AudioPlayer';
 
 import { createClient } from '../utils/supabase/client';
 
@@ -26,12 +27,21 @@ export default function GuiaPage() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [pois, setPois] = useState<any[]>([]);
+  const [musicUrl, setMusicUrl] = useState('');
+  const [appMusicEnabled, setAppMusicEnabled] = useState(false);
 
   React.useEffect(() => {
     supabase.from('guide_pois').select('*').then((response) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const data: any[] | null = response.data;
       if (data) setPois(data);
+    });
+    
+    supabase.from('global_settings').select('*').eq('id', 'default').single().then(({ data }) => {
+      if (data) {
+        setMusicUrl(data.music_url || '');
+        setAppMusicEnabled(data.app_music_enabled ?? true);
+      }
     });
   }, [supabase]);
 
@@ -294,6 +304,11 @@ export default function GuiaPage() {
           <span className="font-body text-[10px] font-bold uppercase tracking-wider mt-1 drop-shadow-[0_0_5px_rgba(216,59,59,0.8)]">URGENCIAS</span>
         </button>
       </nav>
+
+      {/* Render AudioPlayer for the App if globally enabled */}
+      {appMusicEnabled && musicUrl && (
+        <AudioPlayer url={musicUrl} />
+      )}
     </main>
   );
 }
