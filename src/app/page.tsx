@@ -4,18 +4,6 @@ import { AudioPlayer } from '../components/AudioPlayer';
 
 import { createClient } from '../utils/supabase/client';
 
-const emergencyData = [
-  { name: 'Policía Local Alicante', phone: '965107200', icon: 'local_police', note: '' },
-  { name: 'Bomberos Alicante', phone: '965982222', icon: 'fire_truck', note: '' },
-  { name: 'Ambulancias (Sanidad)', phone: '965933000', icon: 'ambulance', note: '' },
-  { name: 'Ambulancias (Alternativa)', phone: '965169400', icon: 'ecg_heart', note: '' },
-  { name: 'Violencia Machista', phone: '965105086', icon: 'health_and_safety', note: '' },
-  { name: 'Trata de Personas', phone: '900105090', icon: 'policy', note: '' },
-  { name: 'Emergencia General', phone: '112', icon: 'emergency', note: '' },
-  { name: 'Radio Taxi Alicante', phone: '965252511', icon: 'local_taxi', note: 'Recomendamos usar la App Pidetaxi' },
-  { name: 'Soporte Budha Rooms', phone: '698947098', icon: 'support_agent', note: '' }
-];
-
 const ZONES = ['Mercado Central', 'Corte Inglés', 'Plaza de Toros', 'Puente Rojo', 'Auditorio'];
 
 export default function GuiaPage() {
@@ -29,6 +17,8 @@ export default function GuiaPage() {
   const [pois, setPois] = useState<any[]>([]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [categories, setCategories] = useState<any[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [emergencies, setEmergencies] = useState<any[]>([]);
   const [musicUrl, setMusicUrl] = useState('');
   const [appMusicEnabled, setAppMusicEnabled] = useState(false);
 
@@ -44,8 +34,14 @@ export default function GuiaPage() {
       const data: any[] | null = response.data;
       if (data) setPois(data);
     });
+
+    supabase.from('emergency_numbers').select('*').order('created_at', { ascending: true }).then((response) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const data: any[] | null = response.data;
+      if (data) setEmergencies(data);
+    });
     
-    supabase.from('global_settings').select('*').eq('id', 'default').single().then(({ data }) => {
+    supabase.from('global_settings').select('*').limit(1).maybeSingle().then(({ data }) => {
       if (data) {
         setMusicUrl(data.music_url || '');
         setAppMusicEnabled(data.app_music_enabled ?? true);
@@ -200,11 +196,11 @@ export default function GuiaPage() {
         <h2 className="font-headline text-3xl font-black tracking-tight text-[#d83b3b] mb-2">URGENCIAS</h2>
         <p className="text-gray-400 text-sm mb-8">Directorio de contacto inmediato</p>
         <div className="space-y-3">
-          {emergencyData.map((item, idx) => (
+          {emergencies.map((item, idx) => (
             <a key={idx} href={`tel:${item.phone}`} className="flex items-center justify-between p-4 bg-[#1e1e1e] rounded-xl border border-white/5 active:border-[#d83b3b]/30">
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-[#d83b3b]/10 text-[#d83b3b] flex items-center justify-center">
-                  <span className="material-symbols-outlined" data-icon={item.icon}>{item.icon}</span>
+                  <span className="material-symbols-outlined" data-icon={item.icon}>{item.icon || 'phone'}</span>
                 </div>
                 <div>
                   <h4 className="font-bold text-white text-sm">{item.name}</h4>
