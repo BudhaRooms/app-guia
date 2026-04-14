@@ -1,32 +1,47 @@
 import type { Metadata } from "next";
 import "./globals.css";
 export const metadata: Metadata = {
-  metadataBase: new URL("https://budharooms.com"),
-  title: "Budha Rooms Alicante",
-  description: "El mejor alojamiento de toda la provincia de Alicante, descubre nuestras instalaciones.",
+  metadataBase: new URL("https://budharoomsapp.web.app"),
+  title: "Budha Rooms Alicante | Guía de Huéspedes",
+  description: "Guía exclusiva para huéspedes de Budha Rooms Alicante. Descubre las mejores recomendaciones de restaurantes, playas, ocio y monumentos.",
+  keywords: ["Budha Rooms Alicante", "Guía de Huéspedes", "Alicante Turismo", "Recomendaciones Alicante", "Guest Guide"],
+  authors: [{ name: "Budha Rooms" }],
+  creator: "Budha Rooms",
+  publisher: "Budha Rooms",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: "/logo_stitch.png",
     apple: "/logo_stitch.png"
   },
   openGraph: {
-    title: "Budha Rooms Alicante",
-    description: "El mejor alojamiento de toda la provincia de Alicante, descubre nuestras instalaciones.",
-    url: "https://budharooms.com",
+    title: "Budha Rooms Alicante | Guía de Huéspedes",
+    description: "Guía interactiva con las mejores recomendaciones locales para tu estancia en Budha Rooms.",
+    url: "https://budharoomsapp.web.app",
     siteName: "Budha Rooms",
     images: [
       {
         url: "/logo_stitch.png",
         width: 1200,
         height: 630,
-        alt: "Budha Rooms Logo",
+        alt: "Budha Rooms Logo - Guía",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Budha Rooms Alicante",
-    description: "El mejor alojamiento de toda la provincia de Alicante.",
+    title: "Budha Rooms | Guía de Huéspedes",
+    description: "Descubre Alicante con las recomendaciones de Budha Rooms.",
   },
 };
 

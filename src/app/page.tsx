@@ -477,7 +477,7 @@ export default function GuiaPage() {
 
       {/* BottomNavBar */}
       <nav className="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-4 pb-8 bg-[#1c1b1b]/90 backdrop-blur-3xl z-50 rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.5)] border-t border-white/5">
-        <Link href="/guia" className="flex flex-col items-center justify-center bg-linear-to-br from-primary to-primary-container text-[#131313] rounded-xl px-5 py-2 scale-95 hover:scale-105 duration-300 ease-out shadow-[0_0_20px_rgba(242,202,80,0.3)]">
+        <Link href="/" className="flex flex-col items-center justify-center bg-linear-to-br from-primary to-primary-container text-[#131313] rounded-xl px-5 py-2 scale-95 hover:scale-105 duration-300 ease-out shadow-[0_0_20px_rgba(242,202,80,0.3)]">
           <span className="material-symbols-outlined" style={{ fontVariationSettings: '"FILL" 1' }}>home</span>
           <span className="font-body text-[10px] font-black uppercase tracking-wider mt-1">INICIO</span>
         </Link>
