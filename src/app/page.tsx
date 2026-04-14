@@ -3,87 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-const POIs = [
-  { title: "Corte Inglés", icon: "location_on", dist: { Centro: 5, Playa: 15 } },
-  { title: "Mercado Central", icon: "location_on", dist: { Centro: 3, Playa: 20 } },
-  { title: "Auditorio", icon: "location_on", dist: { Centro: 15, Playa: 25 } },
-  { title: "Plaza de Toros", icon: "location_on", dist: { Centro: 10, Playa: 12 } },
-  { title: "Puente Rojo", icon: "location_on", dist: { Centro: 12, Playa: 30 } },
-];
-
-
-
-const zoneData: Record<string, Record<string, {name: string, thumb: string, desc: string, mapLink: string}[]>> = {
-  'Corte Inglés': {
-    'Parkings': [
-      { name: 'Parking Maisonnave', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'Bajo la Av. Maisonnave', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Maisonnave+Alicante' },
-      { name: 'Parking Alfonso El Sabio', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Céntrico', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Alfonso+El+Sabio+Alicante' }
-    ],
-    'Farmacias': [
-      { name: 'Farmacia 24H Federico Soto', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Abierto 24 Horas', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+24h+Federico+Soto+Alicante' },
-      { name: 'Farmacia Maisonnave', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'En la misma avenida', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Maisonnave+Alicante' }
-    ],
-    'Supermercados': [
-      { name: 'Supermercado El Corte Inglés', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'Productos Gourmet', mapLink: 'https://www.google.com/maps/search/?api=1&query=Eci+Supermercado+Maisonnave+Alicante' },
-      { name: 'Mercadona Churruca', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqN89yqrl04zkNGYldSmvKr_N072mvENLJfXqXLV2S0NusFgqYDiTdZOxw3XMM1yhqm7mfUp-EpYhqvjs3CXZN5F2BmKEy8eDHgD_zQ2hVrRiiE0BLxEB4hjGXw4jfcBSH1IuyB_5vdra8Z-B6EfCkw7qJ-NIz1dtoRbTMCTtSHjx_JP86Ak3TjmyaP7L_Wzd_6-VhmpbnJQnsyfCdw1dTovJ8K2RDXh35VIostfK9oLTgK3isxJdCsC_aLklqRi7pYrddkS5gjxga', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercadona+Churruca+Alicante' }
-    ]
-  },
-  'Mercado Central': {
-    'Parkings': [
-      { name: 'Parking Mercado Central', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Sótano del mercado', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Alfonso+El+Sabio+Mercado+Alicante' },
-      { name: 'Parking San Cristóbal', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'Cerca del Mercado', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+San+Cristobal+Alicante' }
-    ],
-    'Farmacias': [
-      { name: 'Farmacia Mercado Central', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Justo frente al mercado', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Mercado+Central+Alicante' }
-    ],
-    'Supermercados': [
-      { name: 'Mercado Central - Puestos', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqN89yqrl04zkNGYldSmvKr_N072mvENLJfXqXLV2S0NusFgqYDiTdZOxw3XMM1yhqm7mfUp-EpYhqvjs3CXZN5F2BmKEy8eDHgD_zQ2hVrRiiE0BLxEB4hjGXw4jfcBSH1IuyB_5vdra8Z-B6EfCkw7qJ-NIz1dtoRbTMCTtSHjx_JP86Ak3TjmyaP7L_Wzd_6-VhmpbnJQnsyfCdw1dTovJ8K2RDXh35VIostfK9oLTgK3isxJdCsC_aLklqRi7pYrddkS5gjxga', desc: 'Comida local fresca, carnes y pescados', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercado+Central+Alicante' },
-      { name: 'Consum San Vicente', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Consum+San+Vicente+Alicante' }
-    ]
-  },
-  'Auditorio': {
-    'Parkings': [
-      { name: 'Parking ADDA', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'Bajo el Auditorio', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+ADDA+Alicante' },
-      { name: 'Parking Auditorio Central', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Auditorio+Central+Alicante' }
-    ],
-    'Farmacias': [
-      { name: 'Farmacia Paseo Campoamor', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Paseo+Campoamor+Alicante' },
-      { name: 'Farmacia Vicente Inglada', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Vicente+Inglada+Alicante' }
-    ],
-    'Supermercados': [
-      { name: 'Mercadona Campoamor', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercadona+Campoamor+Alicante' },
-      { name: 'Dialprix San Vicente', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Dialprix+San+Vicente+Alicante' }
-    ]
-  },
-  'Plaza de Toros': {
-    'Parkings': [
-      { name: 'Parking Panteón de Quijano', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Panteon+de+Quijano+Alicante' },
-      { name: 'Parking La Lonja', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+La+Lonja+Alicante' }
-    ],
-    'Farmacias': [
-      { name: 'Farmacia Plaza de Toros', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Plaza+de+Toros+Alicante' },
-      { name: 'Farmacia Avenida de Alcoy', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Avenida+de+Alcoy+Alicante' }
-    ],
-    'Supermercados': [
-      { name: 'Masymas Calderón', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqN89yqrl04zkNGYldSmvKr_N072mvENLJfXqXLV2S0NusFgqYDiTdZOxw3XMM1yhqm7mfUp-EpYhqvjs3CXZN5F2BmKEy8eDHgD_zQ2hVrRiiE0BLxEB4hjGXw4jfcBSH1IuyB_5vdra8Z-B6EfCkw7qJ-NIz1dtoRbTMCTtSHjx_JP86Ak3TjmyaP7L_Wzd_6-VhmpbnJQnsyfCdw1dTovJ8K2RDXh35VIostfK9oLTgK3isxJdCsC_aLklqRi7pYrddkS5gjxga', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Masymas+Calderon+de+la+barca+Alicante' },
-      { name: 'Mercadona Alfonso X El Sabio', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercadona+Alfonso+X+El+Sabio+Alicante' }
-    ]
-  },
-  'Puente Rojo': {
-    'Parkings': [
-      { name: 'Parking Estación RENFE', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Parking más cercano con vigilancia', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Estacion+Renfe+Alicante' },
-      { name: 'Parking Florida', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Florida+Alicante' }
-    ],
-    'Farmacias': [
-      { name: 'Farmacia Doctor Rico', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Cerca de Puente Rojo', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Doctor+Rico+Alicante' },
-      { name: 'Farmacia Babel', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Babel+Alicante' }
-    ],
-    'Supermercados': [
-      { name: 'Mercadona Princesa Mercedes', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercadona+Princesa+Mercedes+Alicante' },
-      { name: 'Aldi', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqN89yqrl04zkNGYldSmvKr_N072mvENLJfXqXLV2S0NusFgqYDiTdZOxw3XMM1yhqm7mfUp-EpYhqvjs3CXZN5F2BmKEy8eDHgD_zQ2hVrRiiE0BLxEB4hjGXw4jfcBSH1IuyB_5vdra8Z-B6EfCkw7qJ-NIz1dtoRbTMCTtSHjx_JP86Ak3TjmyaP7L_Wzd_6-VhmpbnJQnsyfCdw1dTovJ8K2RDXh35VIostfK9oLTgK3isxJdCsC_aLklqRi7pYrddkS5gjxga', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Aldi+Puente+Rojo+Alicante' }
-    ]
-  }
-};
+import { createClient } from '../utils/supabase/client';
 
 const emergencyData = [
   { name: 'Policía Local Alicante', phone: '965107200', icon: 'local_police', note: '' },
@@ -97,45 +17,25 @@ const emergencyData = [
   { name: 'Soporte Budha Rooms', phone: '698947098', icon: 'support_agent', note: '' }
 ];
 
-const globalCategoryData: Record<string, {name: string, thumb: string, desc: string, mapLink: string}[]> = {
-  'Restaurantes': [
-    { name: 'El Chiringuito Tropical', thumb: 'https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&q=80&w=600', desc: 'Latino - Comida tropical', mapLink: 'https://maps.google.com/?q=El+Chiringuito+Tropical+Alicante' },
-    { name: 'Arepa\'s Alicante', thumb: 'https://images.unsplash.com/photo-1621841957884-1210fe19d66d?auto=format&fit=crop&q=80&w=600', desc: 'Latino - Especialidad en Arepas', mapLink: 'https://maps.google.com/?q=Arepas+Alicante' },
-    { name: 'Mery Croket', thumb: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&q=80&w=600', desc: 'Latino - Croquetas creativas', mapLink: 'https://maps.google.com/?q=Mery+Croket+Alicante' },
-    { name: 'El Portal', thumb: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=600', desc: 'Alta Gama - Taberna y Vinos', mapLink: 'https://maps.google.com/?q=El+Portal+Taberna+Alicante' },
-    { name: 'Nou Manolín', thumb: 'https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=600', desc: 'Alta Gama - Barra icónica', mapLink: 'https://maps.google.com/?q=Nou+Manolin+Alicante' },
-    { name: 'Monastrell', thumb: 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&q=80&w=600', desc: 'Alta Gama - Estrella Michelin', mapLink: 'https://maps.google.com/?q=Monastrell+Restaurante+Alicante' }
-  ],
-  'Ocio Nocturno': [
-    { name: 'Marmarela', thumb: 'https://images.unsplash.com/photo-1566737236500-c8ac43014a67', desc: 'Discoteca - Sitio Recomendado', mapLink: 'https://maps.google.com/?q=Marmarela+Alicante' },
-    { name: 'Puntapiedra', thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e', desc: 'Club Costa - Sitio Recomendado', mapLink: 'https://maps.google.com/?q=Puntapiedra+Coast+Club+Alicante' },
-    { name: 'Calle Castaños', thumb: 'https://images.unsplash.com/photo-1565447162108-5a44f22d5364', desc: 'Tardeo Alicantino', mapLink: 'https://maps.google.com/?q=Calle+Castaños+Alicante' }
-  ],
-  'Playas': [
-    { name: 'Playa del Postiguet', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Playa_del_Postiguet_4.jpg/960px-Playa_del_Postiguet_4.jpg', desc: 'Céntrica al pie del castillo', mapLink: 'https://maps.google.com/?q=Playa+del+Postiguet+Alicante' },
-    { name: 'Playa de San Juan', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Alicante_-_Playa_de_San_Juan_05.jpg/960px-Alicante_-_Playa_de_San_Juan_05.jpg', desc: 'Extenso arenal', mapLink: 'https://maps.google.com/?q=Playa+de+San+Juan+Alicante' },
-    { name: 'Playa de la Albufereta', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Alicante_-_Playa_de_la_Albufereta_02.jpg/960px-Alicante_-_Playa_de_la_Albufereta_02.jpg', desc: 'Cala tranquila y familiar', mapLink: 'https://maps.google.com/?q=Playa+de+la+Albufereta+Alicante' }
-  ],
-  'Monumentos': [
-    { name: 'Castillo de Santa Bárbara', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Castello_de_Santa_B%C3%A0rbara_Alicante.jpg/960px-Castello_de_Santa_B%C3%A0rbara_Alicante.jpg', desc: 'Fortaleza panorámica', mapLink: 'https://maps.google.com/?q=Castillo+de+Santa+Barbara+Alicante' },
-    { name: 'Barrio de Santa Cruz', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Barrio_de_Santa_Cruz%2C_Alicante.jpg/960px-Barrio_de_Santa_Cruz%2C_Alicante.jpg', desc: 'Calles pintorescas', mapLink: 'https://maps.google.com/?q=Barrio+de+Santa+Cruz+Alicante' },
-    { name: 'Concatedral de San Nicolás', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Concatedral_de_San_Nicol%C3%A1s_de_Bari%2C_Alicante_01.jpg/960px-Concatedral_de_San_Nicol%C3%A1s_de_Bari%2C_Alicante_01.jpg', desc: 'Arquitectura Renacentista', mapLink: 'https://maps.google.com/?q=Concatedral+de+San+Nicolas+Alicante' }
-  ],
-  'Zonas Populares': [
-    { name: 'Explanada de España', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Explanada_de_Espa%C3%B1a%2C_Alicante.jpg/960px-Explanada_de_Espa%C3%B1a%2C_Alicante.jpg', desc: 'Paseo Marítimo Icónico', mapLink: 'https://maps.google.com/?q=Explanada+de+España+Alicante' },
-    { name: 'Puerto de Alicante', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Port_of_Alicante_4.jpg/960px-Port_of_Alicante_4.jpg', desc: 'Barcos y Ocio', mapLink: 'https://maps.google.com/?q=Puerto+de+Alicante' },
-    { name: 'Mercado Central', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Mercado_Central_de_Alicante_03.jpg/960px-Mercado_Central_de_Alicante_03.jpg', desc: 'Edificio Histórico', mapLink: 'https://maps.google.com/?q=Mercado+Central+Alicante' }
-  ]
-};
-
 export default function GuiaPage() {
-  const [apartment] = useState("Centro");
-  const [activeView, setActiveView] = useState<'home' | 'list' | 'urgencias' | 'zoneHub' | 'zoneList'>('home');
+  const supabase = createClient();
+  const [activeView, setActiveView] = useState<'home' | 'list' | 'urgencias'>('home');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [activeZone, setActiveZone] = useState<string | null>(null);
-  const [activeSubCategory, setActiveSubCategory] = useState<string | null>(null);
+  
 
-  const sortedPOIs = [...POIs].sort((a, b) => a.dist[apartment as keyof typeof a.dist] - b.dist[apartment as keyof typeof b.dist]);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [pois, setPois] = useState<any[]>([]);
+
+  React.useEffect(() => {
+    supabase.from('guide_pois').select('*').then((response) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const data: any[] | null = response.data;
+      if (data) setPois(data);
+    });
+  }, [supabase]);
+
+  const categoryPois = activeCategory ? pois.filter(p => p.category === activeCategory) : [];
   return (
     <main className="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary relative overflow-x-hidden min-h-screen pb-24">
       {/* Buddha Background Watermark */}
@@ -297,33 +197,6 @@ export default function GuiaPage() {
 
         </section>
 
-        {/* Places of Interest Section */}
-        <section className="mt-16 mb-8 max-w-2xl">
-          <div className="mb-8">
-            <span className="text-primary font-bold tracking-[0.2em] text-[10px] uppercase">CERCA DE TI</span>
-            <h2 className="font-headline text-3xl font-black mt-2 uppercase tracking-tight text-white/90">INFORMACIÓN DE INTERÉS</h2>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            {sortedPOIs.map((item, index) => (
-              <button 
-                key={index} 
-                onClick={() => { setActiveZone(item.title); setActiveView('zoneHub'); window.scrollTo(0, 0); }}
-                className="w-full text-left group flex items-center justify-between p-5 rounded-xl bg-surface-container-low border border-outline-variant/20 hover:border-primary/50 transition-all duration-300"
-              >
-                <div className="flex items-center gap-5">
-                  <div className="w-12 h-12 shrink-0 flex items-center justify-center rounded-lg bg-surface-container-high border border-primary/10 group-hover:border-primary/30 transition-colors">
-                    <span className="material-symbols-outlined text-primary text-2xl">{item.icon}</span>
-                  </div>
-                  <div className="text-left flex-1 py-1">
-                    <h4 className="font-headline font-bold text-on-surface text-lg tracking-wide uppercase">{item.title}</h4>
-                  </div>
-                </div>
-                <span className="shrink-0 material-symbols-outlined text-primary/40 group-hover:text-primary group-hover:translate-x-1 transition-all">chevron_right</span>
-              </button>
-            ))}
-          </div>
-        </section>
       </div>
       )}
 
@@ -362,77 +235,7 @@ export default function GuiaPage() {
         </div>
       )}
 
-      {activeView === 'zoneHub' && activeZone && (
-        <div className="pt-24 px-6 max-w-7xl mx-auto relative z-10 w-full animate-in slide-in-from-right-4 fade-in duration-300 min-h-[70vh]">
-          <div className="flex items-center gap-4 mb-8">
-            <button onClick={() => setActiveView('home')} className="shrink-0 w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary border border-primary/20 hover:bg-primary/10 transition-all active:scale-95">
-              <span className="material-symbols-outlined">arrow_back</span>
-            </button>
-            <div>
-              <h1 className="font-headline text-2xl md:text-3xl font-black uppercase text-on-surface tracking-widest leading-tight">{activeZone}</h1>
-              <span className="text-primary font-bold tracking-[0.2em] text-[10px] uppercase">SERVICIOS DE LA ZONA</span>
-            </div>
-          </div>
-          
-          {zoneData[activeZone] ? (
-            <div className="flex flex-col gap-4">
-              {[
-                { id: 'Parkings', icon: 'local_parking' },
-                { id: 'Farmacias', icon: 'local_pharmacy' },
-                { id: 'Supermercados', icon: 'shopping_cart' }
-              ].map(cat => (
-                <button 
-                  key={cat.id} 
-                  onClick={() => { setActiveSubCategory(cat.id); setActiveView('zoneList'); window.scrollTo(0, 0); }}
-                  className="w-full relative overflow-hidden group flex items-center justify-between p-6 rounded-xl bg-surface-container-low border border-white/5 hover:border-primary/50 transition-all duration-300"
-                >
-                  <div className="flex items-center gap-6 relative z-10">
-                     <span className="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">{cat.icon}</span>
-                     <h3 className="font-headline font-bold text-on-surface uppercase text-lg tracking-widest">{cat.id}</h3>
-                  </div>
-                  <span className="material-symbols-outlined text-primary/40 group-hover:text-primary group-hover:translate-x-2 transition-all relative z-10">east</span>
-                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-primary/5 to-transparent -translate-x-[150%] group-hover:animate-[shimmer_2s_infinite]"></div>
-                </button>
-              ))}
-            </div>
-          ) : null}
-        </div>
-      )}
 
-      {activeView === 'zoneList' && activeZone && activeSubCategory && (
-        <div className="pt-24 px-6 max-w-7xl mx-auto relative z-10 w-full animate-in slide-in-from-right-4 fade-in duration-300 min-h-[70vh]">
-          <div className="flex items-center gap-4 mb-8">
-            <button onClick={() => setActiveView('zoneHub')} className="w-10 h-10 shrink-0 rounded-full bg-surface-container-high flex items-center justify-center text-primary border border-primary/20 hover:bg-primary/10 transition-all active:scale-95">
-              <span className="material-symbols-outlined">arrow_back</span>
-            </button>
-            <div>
-              <h1 className="font-headline text-2xl md:text-3xl font-black uppercase text-on-surface tracking-widest leading-tight">{activeSubCategory}</h1>
-              <span className="text-primary font-bold tracking-[0.2em] text-[10px] uppercase">ZONA {activeZone}</span>
-            </div>
-          </div>
-          
-          <div className="flex flex-col gap-4">
-            {zoneData[activeZone]?.[activeSubCategory]?.map((item, idx) => (
-               <div key={idx} className="flex gap-4 p-4 rounded-xl bg-surface-container-low border border-white/5 hover:border-primary/30 transition-all group">
-                <div className="w-24 h-24 shrink-0 overflow-hidden rounded-lg bg-surface-container-high border border-white/5">
-                  <img src={item.thumb} alt={item.name} className="w-full h-full object-cover brightness-75 group-hover:scale-110 transition-all duration-500" />
-                </div>
-                <div className="flex flex-col justify-between flex-1 py-1">
-                  <div>
-                    <h3 className="font-headline font-bold text-on-surface uppercase text-sm md:text-base tracking-widest leading-tight">{item.name}</h3>
-                    <p className="text-[10px] md:text-xs text-on-surface-variant font-bold tracking-widest mt-1 uppercase">{item.desc}</p>
-                  </div>
-                  <a href={item.mapLink} target="_blank" rel="noreferrer" className="mt-3 bg-linear-to-br from-primary to-primary-container text-[#131313] px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-[9px] md:text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 w-max shadow-[0_0_15px_rgba(242,202,80,0.2)] active:scale-95 transition-all hover:brightness-110">
-                    <span className="material-symbols-outlined text-[14px]">map</span>
-                    Ir con Google Maps
-                  </a>
-                </div>
-              </div>
-            ))}
-
-          </div>
-        </div>
-      )}
 
       {/* Global Category List View */}
       {activeView === 'list' && activeCategory && (
@@ -448,9 +251,10 @@ export default function GuiaPage() {
           </div>
           
           <div className="flex flex-col gap-4">
-            {globalCategoryData[activeCategory]?.map((item, idx) => (
+            {categoryPois.length === 0 && <p className="text-on-surface-variant text-center my-8">Aún no hay recomendaciones en esta categoría.</p>}
+            {categoryPois.map((item, idx) => (
                <div key={idx} className="flex gap-4 p-4 rounded-xl bg-surface-container-low border border-white/5 hover:border-primary/30 transition-all group relative overflow-hidden">
-                {item.desc.includes('Sitio Recomendado') && (
+                {item.description && item.description.includes('Sitio Recomendado') && (
                   <div className="absolute top-0 right-0 bg-primary text-[#131313] px-3 py-1 rounded-bl-xl text-[9px] font-black uppercase tracking-widest z-10">
                     Recomendado
                   </div>
@@ -461,7 +265,7 @@ export default function GuiaPage() {
                 <div className="flex flex-col justify-between flex-1 py-1 relative z-10">
                   <div>
                     <h3 className="font-headline font-bold text-on-surface uppercase text-sm md:text-base tracking-widest leading-tight">{item.name}</h3>
-                    <p className="text-[10px] md:text-xs text-on-surface-variant font-bold tracking-widest mt-1 uppercase max-h-8 overflow-hidden text-ellipsis">{item.desc}</p>
+                    <p className="text-[10px] md:text-xs text-on-surface-variant font-bold tracking-widest mt-1 uppercase max-h-8 overflow-hidden text-ellipsis">{item.description}</p>
                   </div>
                   <a href={item.mapLink} target="_blank" rel="noreferrer" className="mt-3 bg-linear-to-br from-primary to-primary-container text-[#131313] px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-[9px] md:text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 w-max shadow-[0_0_15px_rgba(242,202,80,0.2)] active:scale-95 transition-all hover:brightness-110">
                     <span className="material-symbols-outlined text-[14px]">map</span>
