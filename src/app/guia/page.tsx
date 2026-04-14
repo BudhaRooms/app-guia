@@ -8,7 +8,7 @@ const POIs = [
   { title: "Mercado Central", icon: "location_on", dist: { Centro: 3, Playa: 20 } },
   { title: "Auditorio", icon: "location_on", dist: { Centro: 15, Playa: 25 } },
   { title: "Plaza de Toros", icon: "location_on", dist: { Centro: 10, Playa: 12 } },
-  { title: "La Playa", icon: "location_on", dist: { Centro: 25, Playa: 0 } },
+  { title: "Puente Rojo", icon: "location_on", dist: { Centro: 12, Playa: 30 } },
 ];
 
 
@@ -16,64 +16,71 @@ const POIs = [
 const zoneData: Record<string, Record<string, {name: string, thumb: string, desc: string, mapLink: string}[]>> = {
   'Corte Inglés': {
     'Parkings': [
-      { name: 'Parking Maisonnave', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'A 2 min - Bajo la Av. Maisonnave', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Maisonnave+Alicante' },
-      { name: 'Parking Alfonso El Sabio', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'A 5 min - Céntrico', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Alfonso+El+Sabio+Alicante' }
+      { name: 'Parking Maisonnave', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'Bajo la Av. Maisonnave', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Maisonnave+Alicante' },
+      { name: 'Parking Alfonso El Sabio', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Céntrico', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Alfonso+El+Sabio+Alicante' }
     ],
     'Farmacias': [
-      { name: 'Farmacia 24H Federico Soto', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'A 2 min - Abierto 24 Horas', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+24h+Federico+Soto+Alicante' },
-      { name: 'Farmacia Maisonnave', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'A 1 min - En la misma avenida', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Maisonnave+Alicante' }
+      { name: 'Farmacia 24H Federico Soto', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Abierto 24 Horas', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+24h+Federico+Soto+Alicante' },
+      { name: 'Farmacia Maisonnave', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'En la misma avenida', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Maisonnave+Alicante' }
     ],
     'Supermercados': [
-      { name: 'Supermercado El Corte Inglés', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'A 1 min - Productos Gourmet', mapLink: 'https://www.google.com/maps/search/?api=1&query=Eci+Supermercado+Maisonnave+Alicante' },
-      { name: 'Mercadona Churruca', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqN89yqrl04zkNGYldSmvKr_N072mvENLJfXqXLV2S0NusFgqYDiTdZOxw3XMM1yhqm7mfUp-EpYhqvjs3CXZN5F2BmKEy8eDHgD_zQ2hVrRiiE0BLxEB4hjGXw4jfcBSH1IuyB_5vdra8Z-B6EfCkw7qJ-NIz1dtoRbTMCTtSHjx_JP86Ak3TjmyaP7L_Wzd_6-VhmpbnJQnsyfCdw1dTovJ8K2RDXh35VIostfK9oLTgK3isxJdCsC_aLklqRi7pYrddkS5gjxga', desc: 'A 4 min', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercadona+Churruca+Alicante' }
+      { name: 'Supermercado El Corte Inglés', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'Productos Gourmet', mapLink: 'https://www.google.com/maps/search/?api=1&query=Eci+Supermercado+Maisonnave+Alicante' },
+      { name: 'Mercadona Churruca', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqN89yqrl04zkNGYldSmvKr_N072mvENLJfXqXLV2S0NusFgqYDiTdZOxw3XMM1yhqm7mfUp-EpYhqvjs3CXZN5F2BmKEy8eDHgD_zQ2hVrRiiE0BLxEB4hjGXw4jfcBSH1IuyB_5vdra8Z-B6EfCkw7qJ-NIz1dtoRbTMCTtSHjx_JP86Ak3TjmyaP7L_Wzd_6-VhmpbnJQnsyfCdw1dTovJ8K2RDXh35VIostfK9oLTgK3isxJdCsC_aLklqRi7pYrddkS5gjxga', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercadona+Churruca+Alicante' }
     ]
   },
   'Mercado Central': {
     'Parkings': [
       { name: 'Parking Mercado Central', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Sótano del mercado', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Alfonso+El+Sabio+Mercado+Alicante' },
-      { name: 'Parking San Cristóbal', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'A 4 min del Mercado', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+San+Cristobal+Alicante' }
+      { name: 'Parking San Cristóbal', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'Cerca del Mercado', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+San+Cristobal+Alicante' }
     ],
     'Farmacias': [
       { name: 'Farmacia Mercado Central', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Justo frente al mercado', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Mercado+Central+Alicante' }
     ],
     'Supermercados': [
       { name: 'Mercado Central - Puestos', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqN89yqrl04zkNGYldSmvKr_N072mvENLJfXqXLV2S0NusFgqYDiTdZOxw3XMM1yhqm7mfUp-EpYhqvjs3CXZN5F2BmKEy8eDHgD_zQ2hVrRiiE0BLxEB4hjGXw4jfcBSH1IuyB_5vdra8Z-B6EfCkw7qJ-NIz1dtoRbTMCTtSHjx_JP86Ak3TjmyaP7L_Wzd_6-VhmpbnJQnsyfCdw1dTovJ8K2RDXh35VIostfK9oLTgK3isxJdCsC_aLklqRi7pYrddkS5gjxga', desc: 'Comida local fresca, carnes y pescados', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercado+Central+Alicante' },
-      { name: 'Consum San Vicente', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'A 3 min', mapLink: 'https://www.google.com/maps/search/?api=1&query=Consum+San+Vicente+Alicante' }
+      { name: 'Consum San Vicente', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Consum+San+Vicente+Alicante' }
     ]
   },
   'Auditorio': {
     'Parkings': [
-      { name: 'Parking ADDA', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'A 1 min - Bajo el Auditorio', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+ADDA+Alicante' }
+      { name: 'Parking ADDA', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'Bajo el Auditorio', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+ADDA+Alicante' },
+      { name: 'Parking Auditorio Central', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Auditorio+Central+Alicante' }
     ],
     'Farmacias': [
-      { name: 'Farmacia Paseo Campoamor', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'A 2 min', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Paseo+Campoamor+Alicante' }
+      { name: 'Farmacia Paseo Campoamor', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Paseo+Campoamor+Alicante' },
+      { name: 'Farmacia Vicente Inglada', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Vicente+Inglada+Alicante' }
     ],
     'Supermercados': [
-      { name: 'Mercadona Campoamor', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'A 3 min', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercadona+Campoamor+Alicante' }
+      { name: 'Mercadona Campoamor', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercadona+Campoamor+Alicante' },
+      { name: 'Dialprix San Vicente', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Dialprix+San+Vicente+Alicante' }
     ]
   },
   'Plaza de Toros': {
     'Parkings': [
-      { name: 'Parking Panteón de Quijano', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'A 2 min', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Panteon+de+Quijano+Alicante' }
+      { name: 'Parking Panteón de Quijano', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Panteon+de+Quijano+Alicante' },
+      { name: 'Parking La Lonja', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+La+Lonja+Alicante' }
     ],
     'Farmacias': [
-      { name: 'Farmacia Plaza de Toros', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'A 1 min', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Plaza+de+Toros+Alicante' }
+      { name: 'Farmacia Plaza de Toros', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Plaza+de+Toros+Alicante' },
+      { name: 'Farmacia Avenida de Alcoy', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Avenida+de+Alcoy+Alicante' }
     ],
     'Supermercados': [
-      { name: 'Masymas Calderón', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqN89yqrl04zkNGYldSmvKr_N072mvENLJfXqXLV2S0NusFgqYDiTdZOxw3XMM1yhqm7mfUp-EpYhqvjs3CXZN5F2BmKEy8eDHgD_zQ2hVrRiiE0BLxEB4hjGXw4jfcBSH1IuyB_5vdra8Z-B6EfCkw7qJ-NIz1dtoRbTMCTtSHjx_JP86Ak3TjmyaP7L_Wzd_6-VhmpbnJQnsyfCdw1dTovJ8K2RDXh35VIostfK9oLTgK3isxJdCsC_aLklqRi7pYrddkS5gjxga', desc: 'A 3 min', mapLink: 'https://www.google.com/maps/search/?api=1&query=Masymas+Calderon+de+la+barca+Alicante' }
+      { name: 'Masymas Calderón', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqN89yqrl04zkNGYldSmvKr_N072mvENLJfXqXLV2S0NusFgqYDiTdZOxw3XMM1yhqm7mfUp-EpYhqvjs3CXZN5F2BmKEy8eDHgD_zQ2hVrRiiE0BLxEB4hjGXw4jfcBSH1IuyB_5vdra8Z-B6EfCkw7qJ-NIz1dtoRbTMCTtSHjx_JP86Ak3TjmyaP7L_Wzd_6-VhmpbnJQnsyfCdw1dTovJ8K2RDXh35VIostfK9oLTgK3isxJdCsC_aLklqRi7pYrddkS5gjxga', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Masymas+Calderon+de+la+barca+Alicante' },
+      { name: 'Mercadona Alfonso X El Sabio', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercadona+Alfonso+X+El+Sabio+Alicante' }
     ]
   },
   'Puente Rojo': {
     'Parkings': [
       { name: 'Parking Estación RENFE', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Parking más cercano con vigilancia', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Estacion+Renfe+Alicante' },
-      { name: 'Parking Florida', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'A 5 min', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Florida+Alicante' }
+      { name: 'Parking Florida', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Parking+Florida+Alicante' }
     ],
     'Farmacias': [
-      { name: 'Farmacia Doctor Rico', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'A 2 min de Puente Rojo', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Doctor+Rico+Alicante' }
+      { name: 'Farmacia Doctor Rico', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDR0G3K3gH-NfBw1w-Xhw7B0vpgB91xg9xv4vtMaG7zh3q8ejP_OPGfELVCG9c0Abj4RwDXHl2raaGz5KqO-h_dXFcU3EZ2OBOKweud8LvYE2Y7taDlV-C4EJ4U92Q_zvcnAqY5xUKyzyBMqUuVJxL1BNg4kWh9nUe-G_eq06WtXOrPo_uuhiSgk3kz_5KO4Fp-sE7Wv4p73TQAYz98vKzOiVWAodl7ztOaObTDEv9TWDWqeY6X3JYxYubzLt7qWnnn8PZegmYEeJ5G', desc: 'Cerca de Puente Rojo', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Doctor+Rico+Alicante' },
+      { name: 'Farmacia Babel', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Farmacia+Babel+Alicante' }
     ],
     'Supermercados': [
-      { name: 'Mercadona Princesa Mercedes', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: 'A 4 min a pie', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercadona+Princesa+Mercedes+Alicante' },
-      { name: 'Aldi', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqN89yqrl04zkNGYldSmvKr_N072mvENLJfXqXLV2S0NusFgqYDiTdZOxw3XMM1yhqm7mfUp-EpYhqvjs3CXZN5F2BmKEy8eDHgD_zQ2hVrRiiE0BLxEB4hjGXw4jfcBSH1IuyB_5vdra8Z-B6EfCkw7qJ-NIz1dtoRbTMCTtSHjx_JP86Ak3TjmyaP7L_Wzd_6-VhmpbnJQnsyfCdw1dTovJ8K2RDXh35VIostfK9oLTgK3isxJdCsC_aLklqRi7pYrddkS5gjxga', desc: 'A 6 min a pie', mapLink: 'https://www.google.com/maps/search/?api=1&query=Aldi+Puente+Rojo+Alicante' }
+      { name: 'Mercadona Princesa Mercedes', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDC1gYhwRcjHTGClTv3VlBTcQktibh794QZS0_vrZ5lm06r1T6wBzsHUxIXcFCN0j_TZHbK6gtLv4tX1scEWcYj9g6I2f1nDhshb0vrMcQY2ETYLZITWnDu655-FQc7tvwAR-7r6z4o46S1lXO93d5NkQfl_3vigLRCpf0-yTCcHUxWWw-sJg-6no80SczRYfnteOElgPhRmXpoq-rJQREK0AtjEUHS_3J5PBJ7hPvZXAtqfOZGH-2KebrhGWbO4MinIPkiLfqXYStP', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Mercadona+Princesa+Mercedes+Alicante' },
+      { name: 'Aldi', thumb: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBqN89yqrl04zkNGYldSmvKr_N072mvENLJfXqXLV2S0NusFgqYDiTdZOxw3XMM1yhqm7mfUp-EpYhqvjs3CXZN5F2BmKEy8eDHgD_zQ2hVrRiiE0BLxEB4hjGXw4jfcBSH1IuyB_5vdra8Z-B6EfCkw7qJ-NIz1dtoRbTMCTtSHjx_JP86Ak3TjmyaP7L_Wzd_6-VhmpbnJQnsyfCdw1dTovJ8K2RDXh35VIostfK9oLTgK3isxJdCsC_aLklqRi7pYrddkS5gjxga', desc: '', mapLink: 'https://www.google.com/maps/search/?api=1&query=Aldi+Puente+Rojo+Alicante' }
     ]
   }
 };
@@ -105,19 +112,19 @@ const globalCategoryData: Record<string, {name: string, thumb: string, desc: str
     { name: 'Calle Castaños', thumb: 'https://images.unsplash.com/photo-1565447162108-5a44f22d5364', desc: 'Tardeo Alicantino', mapLink: 'https://maps.google.com/?q=Calle+Castaños+Alicante' }
   ],
   'Playas': [
-    { name: 'Playa del Postiguet', thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e', desc: 'Céntrica al pie del castillo', mapLink: 'https://maps.google.com/?q=Playa+del+Postiguet+Alicante' },
-    { name: 'Playa de San Juan', thumb: 'https://images.unsplash.com/photo-1610056494052-6a4f83a8368c', desc: 'Extenso arenal', mapLink: 'https://maps.google.com/?q=Playa+de+San+Juan+Alicante' },
-    { name: 'Playa de la Albufereta', thumb: 'https://images.unsplash.com/photo-1519046904884-53103b34b206', desc: 'Cala tranquila y familiar', mapLink: 'https://maps.google.com/?q=Playa+de+la+Albufereta+Alicante' }
+    { name: 'Playa del Postiguet', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Playa_del_Postiguet_4.jpg/960px-Playa_del_Postiguet_4.jpg', desc: 'Céntrica al pie del castillo', mapLink: 'https://maps.google.com/?q=Playa+del+Postiguet+Alicante' },
+    { name: 'Playa de San Juan', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Alicante_-_Playa_de_San_Juan_05.jpg/960px-Alicante_-_Playa_de_San_Juan_05.jpg', desc: 'Extenso arenal', mapLink: 'https://maps.google.com/?q=Playa+de+San+Juan+Alicante' },
+    { name: 'Playa de la Albufereta', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Alicante_-_Playa_de_la_Albufereta_02.jpg/960px-Alicante_-_Playa_de_la_Albufereta_02.jpg', desc: 'Cala tranquila y familiar', mapLink: 'https://maps.google.com/?q=Playa+de+la+Albufereta+Alicante' }
   ],
   'Monumentos': [
-    { name: 'Castillo de Santa Bárbara', thumb: 'https://images.unsplash.com/photo-1489425993498-a690cb61c597', desc: 'Fortaleza panorámica', mapLink: 'https://maps.google.com/?q=Castillo+de+Santa+Barbara+Alicante' },
-    { name: 'Barrio de Santa Cruz', thumb: 'https://images.unsplash.com/photo-1643454744919-3619dfbad507', desc: 'Calles pintorescas', mapLink: 'https://maps.google.com/?q=Barrio+de+Santa+Cruz+Alicante' },
-    { name: 'Concatedral de San Nicolás', thumb: 'https://images.unsplash.com/photo-1664235411825-df6783be09a9', desc: 'Arquitectura Renacentista', mapLink: 'https://maps.google.com/?q=Concatedral+de+San+Nicolas+Alicante' }
+    { name: 'Castillo de Santa Bárbara', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Castello_de_Santa_B%C3%A0rbara_Alicante.jpg/960px-Castello_de_Santa_B%C3%A0rbara_Alicante.jpg', desc: 'Fortaleza panorámica', mapLink: 'https://maps.google.com/?q=Castillo+de+Santa+Barbara+Alicante' },
+    { name: 'Barrio de Santa Cruz', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Barrio_de_Santa_Cruz%2C_Alicante.jpg/960px-Barrio_de_Santa_Cruz%2C_Alicante.jpg', desc: 'Calles pintorescas', mapLink: 'https://maps.google.com/?q=Barrio+de+Santa+Cruz+Alicante' },
+    { name: 'Concatedral de San Nicolás', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Concatedral_de_San_Nicol%C3%A1s_de_Bari%2C_Alicante_01.jpg/960px-Concatedral_de_San_Nicol%C3%A1s_de_Bari%2C_Alicante_01.jpg', desc: 'Arquitectura Renacentista', mapLink: 'https://maps.google.com/?q=Concatedral+de+San+Nicolas+Alicante' }
   ],
   'Zonas Populares': [
-    { name: 'Explanada de España', thumb: 'https://images.unsplash.com/photo-1519677100203-a0e668c92439', desc: 'Paseo Marítimo Icónico', mapLink: 'https://maps.google.com/?q=Explanada+de+España+Alicante' },
-    { name: 'Puerto de Alicante', thumb: 'https://images.unsplash.com/photo-1498654200940-1e528ac6bf13', desc: 'Barcos y Ocio', mapLink: 'https://maps.google.com/?q=Puerto+de+Alicante' },
-    { name: 'Mercado Central', thumb: 'https://images.unsplash.com/photo-1536511132646-7f41a87bb7eb', desc: 'Edificio Histórico', mapLink: 'https://maps.google.com/?q=Mercado+Central+Alicante' }
+    { name: 'Explanada de España', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Explanada_de_Espa%C3%B1a%2C_Alicante.jpg/960px-Explanada_de_Espa%C3%B1a%2C_Alicante.jpg', desc: 'Paseo Marítimo Icónico', mapLink: 'https://maps.google.com/?q=Explanada+de+España+Alicante' },
+    { name: 'Puerto de Alicante', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Port_of_Alicante_4.jpg/960px-Port_of_Alicante_4.jpg', desc: 'Barcos y Ocio', mapLink: 'https://maps.google.com/?q=Puerto+de+Alicante' },
+    { name: 'Mercado Central', thumb: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Mercado_Central_de_Alicante_03.jpg/960px-Mercado_Central_de_Alicante_03.jpg', desc: 'Edificio Histórico', mapLink: 'https://maps.google.com/?q=Mercado+Central+Alicante' }
   ]
 };
 
@@ -165,10 +172,10 @@ export default function GuiaPage() {
       <div className="pt-24 px-6 max-w-7xl mx-auto relative z-10 w-full animate-in fade-in duration-500">
         {/* Emergency Call Banner */}
         <div className="mb-8 w-full">
-          <button onClick={() => { setActiveView('urgencias'); window.scrollTo(0, 0); }} className="emergency-glow w-full bg-surface-container-high py-4 rounded-xl flex items-center justify-center gap-3 active:scale-[0.98] transition-all relative overflow-hidden">
-            <span className="material-symbols-outlined text-[#d83b3b] animate-pulse" data-icon="phone">phone</span>
-            <span className="text-[#d83b3b] font-bold tracking-[0.15em] text-xs uppercase">Números de Emergencia</span>
-            <div className="absolute inset-0 bg-linear-to-r from-transparent via-[#d83b3b]/10 to-transparent -translate-x-[150%] animate-[shimmer_2s_infinite]"></div>
+          <button onClick={() => { setActiveView('urgencias'); window.scrollTo(0, 0); }} className="w-full bg-[#d83b3b]/10 border border-[#d83b3b]/50 shadow-[0_0_20px_rgba(216,59,59,0.2)] py-4 rounded-xl flex items-center justify-center gap-3 active:scale-[0.98] transition-all relative overflow-hidden animate-pulse hover:bg-[#d83b3b]/20">
+            <span className="material-symbols-outlined text-[#d83b3b] animate-bounce" data-icon="phone">phone</span>
+            <span className="text-[#d83b3b] font-black tracking-[0.15em] text-xs uppercase drop-shadow-[0_0_5px_rgba(216,59,59,0.8)]">Números de Emergencia</span>
+            <div className="absolute inset-0 bg-linear-to-r from-transparent via-[#d83b3b]/20 to-transparent -translate-x-[150%] animate-[shimmer_2s_infinite]"></div>
           </button>
         </div>
 
@@ -310,7 +317,6 @@ export default function GuiaPage() {
                   </div>
                   <div className="text-left flex-1 py-1">
                     <h4 className="font-headline font-bold text-on-surface text-lg tracking-wide uppercase">{item.title}</h4>
-                    <p className="text-[10px] text-on-surface-variant font-bold tracking-widest uppercase">A {item.dist[apartment as keyof typeof item.dist]} mins a pie</p>
                   </div>
                 </div>
                 <span className="shrink-0 material-symbols-outlined text-primary/40 group-hover:text-primary group-hover:translate-x-1 transition-all">chevron_right</span>
@@ -479,9 +485,9 @@ export default function GuiaPage() {
           <span className="material-symbols-outlined">explore</span>
           <span className="font-body text-[10px] font-bold uppercase tracking-wider mt-1">EXPLORAR</span>
         </Link>
-        <button onClick={() => { setActiveView('urgencias'); window.scrollTo(0, 0); }} className={`flex flex-col items-center justify-center px-4 py-2 hover:text-primary hover:-translate-y-1 transition-all ${activeView === 'urgencias' ? 'text-primary' : 'text-on-surface-variant'}`}>
+        <button onClick={() => { setActiveView('urgencias'); window.scrollTo(0, 0); }} className={`flex flex-col items-center justify-center px-4 py-2 hover:-translate-y-1 transition-all animate-pulse ${activeView === 'urgencias' ? 'text-[#d83b3b] drop-shadow-[0_0_8px_rgba(216,59,59,0.8)]' : 'text-[#d83b3b]'}`}>
           <span className="material-symbols-outlined">phone</span>
-          <span className="font-body text-[10px] font-bold uppercase tracking-wider mt-1">URGENCIAS</span>
+          <span className="font-body text-[10px] font-bold uppercase tracking-wider mt-1 drop-shadow-[0_0_5px_rgba(216,59,59,0.8)]">URGENCIAS</span>
         </button>
       </nav>
     </main>
