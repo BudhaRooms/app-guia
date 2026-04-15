@@ -20,9 +20,7 @@ export default function GuiaPage() {
   const supabase = createClient();
 
   type View = 'home' | 'category' | 'zone_detail' | 'urgencias';
-  const [view, setView] = useState<View>('home');
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [activeCatMeta, setActiveCatMeta] = useState<typeof GLOBAL_CATEGORIES[0] | null>(null);
+  const [view, setView] = useState<View>('home');  const [activeCatMeta, setActiveCatMeta] = useState<typeof GLOBAL_CATEGORIES[0] | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [activeCatObj, setActiveCatObj] = useState<any>(null);
   const [activeZone, setActiveZone] = useState<string>('');
@@ -55,7 +53,8 @@ export default function GuiaPage() {
   }, [supabase]);
 
   useEffect(() => {
-    void fetchAll();
+    const init = async () => { await fetchAll(); };
+    void init();
     const channel = supabase
       .channel('guide_realtime')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'guide_pois' }, fetchAll)
@@ -104,7 +103,7 @@ export default function GuiaPage() {
           <button onClick={goBack} className="w-10 h-10 flex items-center justify-center rounded-full text-[#d2b86b] hover:bg-white/5 active:scale-90 transition-all">
             <span className="material-symbols-outlined">arrow_back</span>
           </button>
-          <span className="font-headline text-sm font-black uppercase tracking-[0.12em] text-transparent bg-clip-text bg-gradient-to-r from-[#d2b86b] via-white to-[#d2b86b]">
+          <span className="font-headline text-sm font-black uppercase tracking-[0.12em] text-transparent bg-clip-text bg-linear-to-r from-[#d2b86b] via-white to-[#d2b86b]">
             BUDHA ROOMS
           </span>
           <div className="w-10 h-10 rounded-full border border-[#d2b86b]/30 overflow-hidden">
@@ -120,7 +119,7 @@ export default function GuiaPage() {
 
           {/* Emergency Banner */}
           <button onClick={() => { setView('urgencias'); window.scrollTo(0, 0); }}
-            className="w-full mb-8 relative overflow-hidden bg-gradient-to-r from-red-950/80 to-red-900/50 rounded-2xl border border-red-500/20 p-4 flex items-center justify-between active:scale-[0.98] transition-all">
+            className="w-full mb-8 relative overflow-hidden bg-linear-to-r from-red-950/80 to-red-900/50 rounded-2xl border border-red-500/20 p-4 flex items-center justify-between active:scale-[0.98] transition-all">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center animate-pulse">
                 <span className="material-symbols-outlined text-red-400 text-xl">emergency</span>
@@ -137,7 +136,7 @@ export default function GuiaPage() {
           <div className="mb-10">
             <h1 className="font-headline text-5xl font-black tracking-tight text-white leading-[0.95] mb-3">
               GUÍA DE<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d2b86b] to-[#f0d891]">HUÉSPEDES</span>
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-[#d2b86b] to-[#f0d891]">HUÉSPEDES</span>
             </h1>
             <p className="text-gray-500 text-sm tracking-[0.15em] uppercase font-semibold">Alicante · Budha Rooms</p>
           </div>
@@ -160,7 +159,7 @@ export default function GuiaPage() {
                   <button
                     key={cat.name}
                     onClick={() => openCategory(cat)}
-                    className={`group relative flex flex-col justify-between p-5 rounded-2xl bg-gradient-to-br ${cat.gradient} border border-white/5 text-left overflow-hidden active:scale-[0.97] transition-all duration-200 ${isLast ? 'col-span-2 flex-row items-center gap-4' : 'min-h-[110px]'}`}
+                    className={`group relative flex flex-col justify-between p-5 rounded-2xl bg-linear-to-br ${cat.gradient} border border-white/5 text-left overflow-hidden active:scale-[0.97] transition-all duration-200 ${isLast ? 'col-span-2 flex-row items-center gap-4' : 'min-h-[110px]'}`}
                     style={{ boxShadow: `0 0 0 0px ${cat.accent}` }}
                   >
                     {/* Glow on hover */}
@@ -216,7 +215,7 @@ export default function GuiaPage() {
       {view === 'category' && activeCatMeta && (
         <div className="pt-20 max-w-2xl mx-auto animate-in slide-in-from-right duration-300">
           {/* Category Hero Banner */}
-          <div className={`relative mx-4 mt-4 mb-6 p-6 rounded-2xl bg-gradient-to-br ${activeCatMeta.gradient} border border-white/5 overflow-hidden`}>
+          <div className={`relative mx-4 mt-4 mb-6 p-6 rounded-2xl bg-linear-to-br ${activeCatMeta.gradient} border border-white/5 overflow-hidden`}>
             <div className="absolute right-4 top-4 text-6xl opacity-20">{activeCatMeta.emoji}</div>
             <span className="text-4xl">{activeCatMeta.emoji}</span>
             <h2 className="font-headline text-2xl font-black text-white uppercase tracking-wide mt-2 leading-tight">{activeCatMeta.name}</h2>
@@ -241,7 +240,7 @@ export default function GuiaPage() {
                         <div className="relative w-full h-48 overflow-hidden bg-[#0a0a0a]">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={poi.image_url} alt={poi.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
+                          <div className="absolute inset-0 bg-linear-to-t from-[#141414] via-transparent to-transparent" />
                           {poi.price && (
                             <span className="absolute bottom-3 right-3 font-bold text-xs px-3 py-1 rounded-full text-black" style={{ background: activeCatMeta.accent }}>{poi.price}</span>
                           )}
@@ -270,7 +269,7 @@ export default function GuiaPage() {
       {/* ═══════════ ZONE DETAIL ═══════════ */}
       {view === 'zone_detail' && (
         <div className="pt-20 max-w-2xl mx-auto animate-in slide-in-from-right duration-300">
-          <div className="relative mx-4 mt-4 mb-6 p-6 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-black border border-white/5 overflow-hidden">
+          <div className="relative mx-4 mt-4 mb-6 p-6 rounded-2xl bg-linear-to-br from-[#1a1a1a] to-black border border-white/5 overflow-hidden">
             <div className="absolute right-4 top-4 text-6xl opacity-10">📍</div>
             <span className="text-4xl">📍</span>
             <h2 className="font-headline text-2xl font-black text-white uppercase tracking-wide mt-2">{activeZone}</h2>
@@ -292,7 +291,7 @@ export default function GuiaPage() {
                         <div className="relative w-full h-48 overflow-hidden bg-[#0a0a0a]">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={poi.image_url} alt={poi.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent" />
+                          <div className="absolute inset-0 bg-linear-to-t from-[#141414] via-transparent to-transparent" />
                           {poi.price && (
                             <span className="absolute bottom-3 right-3 bg-[#d2b86b] text-black font-bold text-xs px-3 py-1 rounded-full">{poi.price}</span>
                           )}
@@ -320,7 +319,7 @@ export default function GuiaPage() {
       {/* ═══════════ URGENCIAS ═══════════ */}
       {view === 'urgencias' && (
         <div className="pt-20 px-4 max-w-2xl mx-auto animate-in slide-in-from-bottom duration-300">
-          <div className="relative mt-4 mb-8 p-6 rounded-2xl bg-gradient-to-br from-red-950/80 to-black border border-red-500/10 overflow-hidden">
+          <div className="relative mt-4 mb-8 p-6 rounded-2xl bg-linear-to-br from-red-950/80 to-black border border-red-500/10 overflow-hidden">
             <div className="absolute right-4 top-4 text-6xl opacity-10">🚨</div>
             <span className="text-4xl">🚨</span>
             <h2 className="font-headline text-2xl font-black text-red-300 uppercase tracking-wide mt-2">Emergencias</h2>
