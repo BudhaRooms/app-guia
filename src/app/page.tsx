@@ -133,8 +133,22 @@ export default function GuiaPage() {
             <span className="material-symbols-outlined text-red-400/50">chevron_right</span>
           </button>
 
+          {/* Logo grande */}
+          <div className="flex flex-col items-center mb-8 mt-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo_stitch.png"
+              alt="Budha Rooms Logo"
+              className="w-36 h-36 object-contain"
+              style={{
+                filter: 'drop-shadow(0 0 18px rgba(210,184,107,0.55)) drop-shadow(0 0 6px rgba(210,184,107,0.3))',
+                animation: 'logoPulse 3s ease-in-out infinite',
+              }}
+            />
+          </div>
+
           {/* Hero */}
-          <div className="mb-10">
+          <div className="mb-10 text-center">
             <h1 className="font-headline text-5xl font-black tracking-tight text-white leading-[0.95] mb-3">
               GUÍA DE<br />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-[#d2b86b] to-[#f0d891]">HUÉSPEDES</span>
