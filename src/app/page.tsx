@@ -238,7 +238,7 @@ export default function GuiaPage() {
                   {catPois.map((poi, idx) => (
                     <div key={idx} className="bg-[#141414] border border-white/5 rounded-2xl overflow-hidden group hover:border-white/10 transition-all">
                       {poi.image_url && (
-                        <div className="relative w-full h-48 overflow-hidden bg-[#0a0a0a]">
+                        <div className="relative w-full h-48 overflow-hidden bg-surface">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={poi.image_url} alt={poi.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                           <div className="absolute inset-0 bg-linear-to-t from-[#141414] via-transparent to-transparent" />
@@ -289,7 +289,7 @@ export default function GuiaPage() {
                   {zonePois.map((poi, idx) => (
                     <div key={idx} className="bg-[#141414] border border-white/5 rounded-2xl overflow-hidden group hover:border-white/10 transition-all">
                       {poi.image_url && (
-                        <div className="relative w-full h-48 overflow-hidden bg-[#0a0a0a]">
+                        <div className="relative w-full h-48 overflow-hidden bg-surface">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={poi.image_url} alt={poi.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                           <div className="absolute inset-0 bg-linear-to-t from-[#141414] via-transparent to-transparent" />
