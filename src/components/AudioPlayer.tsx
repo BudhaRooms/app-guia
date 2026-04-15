@@ -94,7 +94,7 @@ export function AudioPlayer({ url, enabled }: { url?: string; enabled?: boolean 
         <button
           id="audio-tap-banner"
           onClick={handleBannerClick}
-          className="fixed bottom-20 left-4 right-4 md:left-auto md:right-6 md:w-80 z-[9999] flex items-center gap-3 px-4 py-3.5 rounded-2xl border border-[#d2b86b]/50 bg-[#131313]/95 shadow-2xl shadow-[#d2b86b]/10 transition-all hover:border-[#d2b86b] animate-in slide-in-from-bottom-4 duration-700"
+          className="fixed bottom-20 left-4 right-4 md:left-auto md:right-6 md:w-80 z-9999 flex items-center gap-3 px-4 py-3.5 rounded-2xl border border-[#d2b86b]/50 bg-[#131313]/95 shadow-2xl shadow-[#d2b86b]/10 transition-all hover:border-[#d2b86b] animate-in slide-in-from-bottom-4 duration-700"
           style={{ backdropFilter: "blur(20px)" }}
           aria-label="Toca para escuchar la música"
         >
@@ -108,7 +108,7 @@ export function AudioPlayer({ url, enabled }: { url?: string; enabled?: boolean 
             <p className="text-white text-[11px] font-black uppercase tracking-[0.2em] leading-tight">
               Música Ambiente
             </p>
-            <p className="text-[#d2b86b]/80 text-[10px] tracking-[0.1em] mt-0.5">
+            <p className="text-[#d2b86b]/80 text-[10px] tracking-widest mt-0.5">
               Toca para escuchar ♪
             </p>
           </div>
@@ -121,7 +121,7 @@ export function AudioPlayer({ url, enabled }: { url?: string; enabled?: boolean 
           id="audio-mute-toggle"
           onClick={toggleMute}
           title={isMuted ? "Activar música" : "Silenciar música"}
-          className={`fixed bottom-20 right-6 w-12 h-12 rounded-full focus:outline-none transition-all duration-300 flex items-center justify-center z-[9999] shadow-lg ${
+          className={`fixed bottom-20 right-6 w-12 h-12 rounded-full focus:outline-none transition-all duration-300 flex items-center justify-center z-9999 shadow-lg ${
             isMuted
               ? "bg-gray-800/80 text-gray-400 border border-gray-700/50 hover:bg-gray-700/80"
               : "bg-[#d2b86b]/90 text-black border border-[#d2b86b]/40 hover:bg-[#d2b86b]"
