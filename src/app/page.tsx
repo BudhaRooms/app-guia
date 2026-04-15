@@ -240,8 +240,8 @@ export default function GuiaPage() {
                     <div className="p-5">
                       <h3 className="font-headline text-xl font-bold text-white mb-2">{poi.name}</h3>
                       <p className="text-gray-400 text-sm leading-relaxed mb-5">{poi.description}</p>
-                      {poi.mapLink && (
-                        <a href={poi.mapLink} target="_blank" rel="noreferrer"
+                      {poi.map_link && (
+                        <a href={poi.map_link} target="_blank" rel="noreferrer"
                           className="flex items-center justify-center gap-2 bg-white text-black py-3 px-6 rounded-xl font-bold text-sm tracking-wider uppercase hover:bg-gray-100 transition-colors">
                           <span className="material-symbols-outlined text-sm">map</span> Ver en Mapa
                         </a>
@@ -285,8 +285,8 @@ export default function GuiaPage() {
                     <div className="p-5">
                       <h3 className="font-headline text-xl font-bold text-white mb-2">{poi.name}</h3>
                       <p className="text-gray-400 text-sm leading-relaxed mb-5">{poi.description}</p>
-                      {poi.mapLink && (
-                        <a href={poi.mapLink} target="_blank" rel="noreferrer"
+                      {poi.map_link && (
+                        <a href={poi.map_link} target="_blank" rel="noreferrer"
                           className="flex items-center justify-center gap-2 bg-white text-black py-3 px-6 rounded-xl font-bold text-sm tracking-wider uppercase hover:bg-gray-100 transition-colors">
                           <span className="material-symbols-outlined text-sm">map</span> Ver en Mapa
                         </a>
