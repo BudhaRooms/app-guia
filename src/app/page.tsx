@@ -20,7 +20,8 @@ export default function GuiaPage() {
   const supabase = createClient();
 
   type View = 'home' | 'category' | 'zone_detail' | 'urgencias';
-  const [view, setView] = useState<View>('home');  const [activeCatMeta, setActiveCatMeta] = useState<typeof GLOBAL_CATEGORIES[0] | null>(null);
+  const [view, setView] = useState<View>('home');
+  const [activeCatMeta, setActiveCatMeta] = useState<typeof GLOBAL_CATEGORIES[0] | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [activeCatObj, setActiveCatObj] = useState<any>(null);
   const [activeZone, setActiveZone] = useState<string>('');
