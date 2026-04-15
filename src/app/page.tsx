@@ -142,47 +142,158 @@ export default function GuiaPage() {
             <p className="text-gray-500 text-sm tracking-[0.15em] uppercase font-semibold">Alicante · Budha Rooms</p>
           </div>
 
-          {/* ── 7 Categories ── */}
+
+          {/* ── 7 Categories Bento Grid ── */}
           <div className="mb-2">
             <p className="text-[10px] font-bold text-gray-600 uppercase tracking-[0.2em] mb-4">Lo mejor de Alicante</p>
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-2 gap-3 mb-8">
-              {[1,2,3,4,5,6,7].map(i => <div key={i} className={`h-28 bg-[#1c1c1c] rounded-2xl animate-pulse ${i === 7 ? 'col-span-2' : ''}`} />)}
+            <div className="space-y-3 mb-10">
+              <div className="h-44 bg-[#1c1c1c] rounded-2xl animate-pulse" />
+              <div className="grid grid-cols-2 gap-3">
+                {[1,2,3,4,5,6].map(i => <div key={i} className="h-28 bg-[#1c1c1c] rounded-2xl animate-pulse" />)}
+              </div>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3 mb-10">
-              {GLOBAL_CATEGORIES.map((cat, i) => {
+            <div className="mb-10 space-y-3">
+              {/* Row 1: Restaurantes — large hero card */}
+              {[GLOBAL_CATEGORIES[0]].map(cat => {
                 const count = getCatPoisByName(cat.name).length;
-                const isLast = i === GLOBAL_CATEGORIES.length - 1;
                 return (
-                  <button
-                    key={cat.name}
-                    onClick={() => openCategory(cat)}
-                    className={`group relative flex flex-col justify-between p-5 rounded-2xl bg-linear-to-br ${cat.gradient} border border-white/5 text-left overflow-hidden active:scale-[0.97] transition-all duration-200 ${isLast ? 'col-span-2 flex-row items-center gap-4' : 'min-h-[110px]'}`}
-                    style={{ boxShadow: `0 0 0 0px ${cat.accent}` }}
-                  >
-                    {/* Glow on hover */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" style={{ boxShadow: `inset 0 0 30px ${cat.accent}20` }} />
-
-                    <span className={`text-3xl leading-none ${isLast ? '' : 'mb-2'}`}>{cat.emoji}</span>
-                    <div className={isLast ? 'flex-1' : ''}>
-                      <p className="font-headline font-black text-white text-sm leading-tight uppercase tracking-wide group-hover:text-white transition-colors">
-                        {cat.name}
-                      </p>
-                      <p className="text-[10px] mt-1 font-semibold" style={{ color: `${cat.accent}99` }}>
-                        {count === 0 ? 'Próximamente' : `${count} ${count === 1 ? 'lugar' : 'lugares'}`}
-                      </p>
+                  <button key={cat.name} onClick={() => openCategory(cat)}
+                    className="group relative w-full h-44 rounded-2xl overflow-hidden text-left active:scale-[0.98] transition-all duration-200">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/cat-restaurantes.jpg" alt={cat.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent" />
+                    <div className="absolute inset-0 p-5 flex flex-col justify-between">
+                      <span className="text-2xl">{cat.emoji}</span>
+                      <div>
+                        <p className="font-headline font-black text-white text-xl uppercase tracking-widest leading-tight">{cat.name}</p>
+                        <p className="text-[10px] font-bold mt-1" style={{ color: `${cat.accent}cc` }}>
+                          {count === 0 ? 'Próximamente' : `${count} ${count === 1 ? 'lugar' : 'lugares'}`}
+                        </p>
+                      </div>
                     </div>
-                    {isLast && (
-                      <span className="material-symbols-outlined text-gray-600 group-hover:text-gray-400 transition-colors">chevron_right</span>
-                    )}
                   </button>
                 );
               })}
+
+              {/* Row 2: Playas (wide) + Monumentos */}
+              <div className="grid grid-cols-5 gap-3">
+                {[GLOBAL_CATEGORIES[1]].map(cat => {
+                  const count = getCatPoisByName(cat.name).length;
+                  return (
+                    <button key={cat.name} onClick={() => openCategory(cat)}
+                      className="group col-span-3 relative h-36 rounded-2xl overflow-hidden text-left active:scale-[0.98] transition-all duration-200">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src="/cat-playas.jpg" alt={cat.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
+                      <div className="absolute inset-0 p-4 flex flex-col justify-between">
+                        <span className="text-xl">{cat.emoji}</span>
+                        <div>
+                          <p className="font-headline font-black text-white text-base uppercase tracking-widest">{cat.name}</p>
+                          <p className="text-[9px] font-bold mt-0.5" style={{ color: `${cat.accent}cc` }}>
+                            {count === 0 ? 'Próximamente' : `${count} lugares`}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+                {[GLOBAL_CATEGORIES[6]].map(cat => {
+                  const count = getCatPoisByName(cat.name).length;
+                  return (
+                    <button key={cat.name} onClick={() => openCategory(cat)}
+                      className="group col-span-2 relative h-36 rounded-2xl overflow-hidden text-left active:scale-[0.98] transition-all duration-200">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src="/cat-culturales.jpg" alt={cat.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
+                      <div className="absolute inset-0 p-4 flex flex-col justify-between">
+                        <span className="text-xl">{cat.emoji}</span>
+                        <div>
+                          <p className="font-headline font-black text-white text-sm uppercase tracking-wide leading-tight">{cat.name}</p>
+                          <p className="text-[9px] font-bold mt-0.5" style={{ color: `${cat.accent}cc` }}>
+                            {count === 0 ? 'Próximamente' : `${count} lugares`}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Row 3: Monumentos (wide) + Ocio Nocturno */}
+              <div className="grid grid-cols-5 gap-3">
+                {[GLOBAL_CATEGORIES[5]].map(cat => {
+                  const count = getCatPoisByName(cat.name).length;
+                  return (
+                    <button key={cat.name} onClick={() => openCategory(cat)}
+                      className="group col-span-2 relative h-36 rounded-2xl overflow-hidden text-left active:scale-[0.98] transition-all duration-200">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src="/cat-monumentos.jpg" alt={cat.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
+                      <div className="absolute inset-0 p-4 flex flex-col justify-between">
+                        <span className="text-xl">{cat.emoji}</span>
+                        <div>
+                          <p className="font-headline font-black text-white text-sm uppercase tracking-wide leading-tight">{cat.name}</p>
+                          <p className="text-[9px] font-bold mt-0.5" style={{ color: `${cat.accent}cc` }}>
+                            {count === 0 ? 'Próximamente' : `${count} lugares`}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+                {[GLOBAL_CATEGORIES[3]].map(cat => {
+                  const count = getCatPoisByName(cat.name).length;
+                  return (
+                    <button key={cat.name} onClick={() => openCategory(cat)}
+                      className="group col-span-3 relative h-36 rounded-2xl overflow-hidden text-left active:scale-[0.98] transition-all duration-200">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src="/cat-nocturno.jpg" alt={cat.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
+                      <div className="absolute inset-0 p-4 flex flex-col justify-between">
+                        <span className="text-xl">{cat.emoji}</span>
+                        <div>
+                          <p className="font-headline font-black text-white text-base uppercase tracking-widest">{cat.name}</p>
+                          <p className="text-[9px] font-bold mt-0.5" style={{ color: `${cat.accent}cc` }}>
+                            {count === 0 ? 'Próximamente' : `${count} lugares`}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Row 4: Centros Comerciales + Zonas Concurridas */}
+              <div className="grid grid-cols-2 gap-3">
+                {[GLOBAL_CATEGORIES[2], GLOBAL_CATEGORIES[4]].map((cat, ci) => {
+                  const count = getCatPoisByName(cat.name).length;
+                  const imgs = ['/cat-comerciales.jpg', '/cat-zonas.jpg'];
+                  return (
+                    <button key={cat.name} onClick={() => openCategory(cat)}
+                      className="group relative h-32 rounded-2xl overflow-hidden text-left active:scale-[0.98] transition-all duration-200">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={imgs[ci]} alt={cat.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
+                      <div className="absolute inset-0 p-4 flex flex-col justify-between">
+                        <span className="text-xl">{cat.emoji}</span>
+                        <div>
+                          <p className="font-headline font-black text-white text-xs uppercase tracking-wider leading-tight">{cat.name}</p>
+                          <p className="text-[9px] font-bold mt-0.5" style={{ color: `${cat.accent}cc` }}>
+                            {count === 0 ? 'Próximamente' : `${count} lugares`}
+                          </p>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           )}
+
 
           {/* ── Zones ── */}
           <div className="mb-2">
