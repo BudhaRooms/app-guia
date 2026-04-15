@@ -227,10 +227,10 @@ export default function GuiaPage() {
               <div className="space-y-5">
                 {catPois.map((poi, idx) => (
                   <div key={idx} className="bg-[#1e1e1e] border border-white/5 rounded-2xl overflow-hidden group">
-                    {poi.thumb && (
+                    {poi.image_url && (
                       <div className="relative w-full h-52 overflow-hidden bg-gray-900">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={poi.thumb} alt={poi.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <img src={poi.image_url} alt={poi.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         <div className="absolute inset-0 bg-linear-to-t from-[#1e1e1e] to-transparent" />
                         {poi.price && (
                           <span className="absolute bottom-3 right-3 bg-[#d2b86b] text-black font-bold text-xs px-3 py-1 rounded-full">{poi.price}</span>
@@ -240,8 +240,8 @@ export default function GuiaPage() {
                     <div className="p-5">
                       <h3 className="font-headline text-xl font-bold text-white mb-2">{poi.name}</h3>
                       <p className="text-gray-400 text-sm leading-relaxed mb-5">{poi.description}</p>
-                      {poi.map_link && (
-                        <a href={poi.map_link} target="_blank" rel="noreferrer"
+                      {poi.maps_link && (
+                        <a href={poi.maps_link} target="_blank" rel="noreferrer"
                           className="flex items-center justify-center gap-2 bg-white text-black py-3 px-6 rounded-xl font-bold text-sm tracking-wider uppercase hover:bg-gray-100 transition-colors">
                           <span className="material-symbols-outlined text-sm">map</span> Ver en Mapa
                         </a>
@@ -272,10 +272,10 @@ export default function GuiaPage() {
               <div className="space-y-5">
                 {zonePois.map((poi, idx) => (
                   <div key={idx} className="bg-[#1e1e1e] border border-white/5 rounded-2xl overflow-hidden group">
-                    {poi.thumb && (
+                    {poi.image_url && (
                       <div className="relative w-full h-52 overflow-hidden bg-gray-900">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={poi.thumb} alt={poi.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <img src={poi.image_url} alt={poi.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         <div className="absolute inset-0 bg-linear-to-t from-[#1e1e1e] to-transparent" />
                         {poi.price && (
                           <span className="absolute bottom-3 right-3 bg-[#d2b86b] text-black font-bold text-xs px-3 py-1 rounded-full">{poi.price}</span>
@@ -285,8 +285,8 @@ export default function GuiaPage() {
                     <div className="p-5">
                       <h3 className="font-headline text-xl font-bold text-white mb-2">{poi.name}</h3>
                       <p className="text-gray-400 text-sm leading-relaxed mb-5">{poi.description}</p>
-                      {poi.map_link && (
-                        <a href={poi.map_link} target="_blank" rel="noreferrer"
+                      {poi.maps_link && (
+                        <a href={poi.maps_link} target="_blank" rel="noreferrer"
                           className="flex items-center justify-center gap-2 bg-white text-black py-3 px-6 rounded-xl font-bold text-sm tracking-wider uppercase hover:bg-gray-100 transition-colors">
                           <span className="material-symbols-outlined text-sm">map</span> Ver en Mapa
                         </a>
